@@ -1,4 +1,5 @@
 const storePage = new URL('https://www.walmart.com/ip/Xbox-Series-X/443574645')
+const targetText = 'Add to cart'
 const yeah = new Audio('https://instantrimshot.com/audio/csi.mp3')
 
 let request = function(url, callback) {
@@ -14,7 +15,7 @@ let request = function(url, callback) {
 let check = function() {
     try {
         request(storePage, response => {
-            if (response.search('>Add to cart<') > -1) {
+            if (response.search('>'+targetText+'<') > -1) {
                 console.warn(new Date().toLocaleTimeString() + ' | IN STOCK')
                 yeah.play()
             }
