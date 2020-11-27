@@ -29,7 +29,7 @@ let start = function() {
         console.error('You must run this from ' + storePage.hostname)
     } else {
         setTimeout(check, 1000)
-        return '\nXbox Stock Checker is running.Do not close this tab.\n'
+        return '\nXbox Stock Checker is running. Do not close this tab.\n'
     }
 }
 start()
