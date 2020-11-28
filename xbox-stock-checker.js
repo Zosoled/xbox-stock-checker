@@ -1,7 +1,6 @@
 let xbox = (function() {
     const yeah = new Audio('https://instantrimshot.com/audio/csi.mp3')
     const buttons = [/\>add to cart\</i, /\>ship it\</i]
-    const 
     
     function get(url, callback) {
         let xhr = new XMLHttpRequest()
