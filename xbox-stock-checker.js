@@ -1,6 +1,6 @@
 let xbox = (function() {
     const yeah = new Audio('https://instantrimshot.com/audio/csi.mp3')
-    const buttons = [/\>add to cart\</i, /\>ship it\</i]
+    const buttons = [/\>add to cart\</i, /\>ship it\</i, /\"add to cart\"/i]
     
     function get(url, callback) {
         let xhr = new XMLHttpRequest()
@@ -14,28 +14,24 @@ let xbox = (function() {
     }
     
     function check() {
-        try {
-            get(window.location.href, response => {
-                buttons.forEach(regex => {
-                    if (regex.test(response)) {
-                        console.warn(new Date().toLocaleTimeString() + ' | IN STOCK')
-                        yeah.play()
-                    }
-                })
+        get(window.location.href, response => {
+            buttons.forEach(regex => {
+                if (regex.test(response)) {
+                    console.warn(new Date().toLocaleTimeString() + ' | IN STOCK')
+                    yeah.play()
+                }
             })
             setTimeout(check, 1000)
-        } catch (err) {
-            console.timeEnd('xbox-stock-checker')
-            console.error('Xbox Stock Checker failed.\n' + err)
-        }
+        })
     }
     
     let start = new Date()
     setTimeout(check)
-    console.info(`%cXbox Stock Checker%c is running in the background.
-    Do not close this tab.
-    Call %cxbox.runtime()%c to view elapsed time.`,
-    'background-color:#107c10;','','background-color:#33c;',''
+    console.info(
+`%cXbox Stock Checker%c is running in the background.
+Do not close this tab.
+Call %cxbox.runtime()%c to view elapsed time.`,
+            'background-color:#107c10;','','background-color:#33c;',''
     )
     
     return {
