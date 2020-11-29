@@ -1,6 +1,6 @@
 let xbox = (function() {
     const yeah = new Audio('https://instantrimshot.com/audio/csi.mp3')
-    const buttons = [/\>add to cart\</i, /\>ship it\</i, /\"add to cart\"/i]
+    const regex = /(\>|\")add to cart(\<|\")/i
     
     function get(url, callback) {
         let xhr = new XMLHttpRequest()
@@ -15,12 +15,10 @@ let xbox = (function() {
     
     function check() {
         get(window.location.href, response => {
-            buttons.forEach(regex => {
-                if (regex.test(response)) {
-                    console.warn(new Date().toLocaleTimeString() + ' | IN STOCK')
-                    yeah.play()
-                }
-            })
+            if (regex.test(response)) {
+                console.warn(new Date().toLocaleTimeString() + ' | IN STOCK')
+                yeah.play()
+            }
             setTimeout(check, 1000)
         })
     }
