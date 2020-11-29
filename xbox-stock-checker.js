@@ -1,6 +1,6 @@
 let xbox = (function() {
     const yeah = new Audio('https://instantrimshot.com/audio/csi.mp3')
-    const regex = /(\>|\")add to cart(\<|\")/i
+    const regex = /\>add to cart\</i
     
     function get(url, callback) {
         let xhr = new XMLHttpRequest()
